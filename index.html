@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suvojit Pal — Software Engineer</title>
+<meta name="description" content="Suvojit Pal — final-year CSE student building AI-driven software.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0a0e14;
+    --bg-panel: #111722;
+    --bg-panel-2: #161d2b;
+    --line: rgba(255,255,255,0.08);
+    --white: #eef2f7;
+    --muted: #8a96a8;
+    --sky: #4fc3f7;
+    --sky-dim: rgba(79,195,247,0.14);
+    --cherry: #d6284f;
+    --cherry-dim: rgba(214,40,79,0.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--white);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--cherry-dim);color:var(--white);}
+  a{color:inherit;text-decoration:none;}
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-0.02em;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
+  section{padding:110px 0;}
+  @media(max-width:640px){section{padding:72px 0;}}
+
+  /* ---------- nav ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    backdrop-filter:blur(10px);
+    background:rgba(10,14,20,0.72);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:18px;padding-bottom:18px;}
+  .logo{font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--sky);}
+  .logo span{color:var(--white);}
+  .navlinks{display:flex;gap:32px;font-size:14px;color:var(--muted);}
+  .navlinks a:hover{color:var(--white);}
+  .navlinks{display:none;}
+  @media(min-width:760px){.navlinks{display:flex;}}
+
+  /* ---------- hero ---------- */
+  .hero{padding-top:170px;padding-bottom:100px;position:relative;}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:center;}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;}}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sky);
+    margin-bottom:18px;display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--sky);box-shadow:0 0 12px var(--sky);}
+  .hero h1{font-size:clamp(38px,6vw,60px);line-height:1.05;margin-bottom:20px;}
+  .hero h1 .accent{color:var(--sky);}
+  .hero p.lead{font-size:17px;color:var(--muted);max-width:480px;margin-bottom:34px;}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    padding:13px 24px;border-radius:6px;font-size:14px;font-weight:500;
+    display:inline-flex;align-items:center;gap:8px;border:1px solid transparent;
+    transition:transform .15s ease, border-color .15s ease, background .15s ease;
+    background:transparent;cursor:pointer;font-family:inherit;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--sky);color:#06121a;}
+  .btn-primary:hover{background:#6fd0fa;}
+  .btn-outline{border-color:var(--line);color:var(--white);}
+  .btn-outline:hover{border-color:var(--sky);}
+  .btn-cherry{border-color:var(--cherry);color:var(--cherry);}
+  .btn-cherry:hover{background:var(--cherry-dim);}
+  .btn-copy{border-color:var(--sky);color:var(--sky);background:transparent;}
+  .btn-copy:hover{background:var(--sky-dim);}
+
+  /* terminal card */
+  .term{
+    background:var(--bg-panel);border:1px solid var(--line);border-radius:10px;
+    overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,0.7);
+  }
+  .term-bar{
+    display:flex;align-items:center;gap:8px;padding:12px 16px;
+    background:var(--bg-panel-2);border-bottom:1px solid var(--line);
+  }
+  .dot{width:10px;height:10px;border-radius:50%;}
+  .term-body{padding:22px 20px;font-family:'JetBrains Mono',monospace;font-size:13.5px;color:#c7d2e0;min-height:210px;}
+  .term-body .muted{color:var(--muted);}
+  .term-body .k{color:var(--sky);}
+  .term-body .s{color:#c8f0a0;}
+  .caret{display:inline-block;width:8px;height:16px;background:var(--cherry);vertical-align:middle;animation:blink 1s step-end infinite;margin-left:2px;}
+  @keyframes blink{50%{opacity:0;}}
+  #typed-line{white-space:pre-wrap;}
+
+  /* ---------- section headers ---------- */
+  .sec-head{margin-bottom:44px;}
+  .sec-head .tag{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--cherry);margin-bottom:10px;display:block;}
+  .sec-head h2{font-size:clamp(26px,4vw,34px);}
+  .divider{height:1px;background:var(--line);border:none;}
+
+  /* ---------- about ---------- */
+  .about-grid{display:grid;grid-template-columns:1.3fr 0.7fr;gap:48px;}
+  @media(max-width:800px){.about-grid{grid-template-columns:1fr;}}
+  .about-grid p{color:#c3ccd9;font-size:16px;margin-bottom:16px;max-width:60ch;}
+  .stat-list{display:flex;flex-direction:column;gap:0;border-left:1px solid var(--line);}
+  .stat{padding:14px 0 14px 22px;border-bottom:1px solid var(--line);}
+  .stat:first-child{padding-top:0;}
+  .stat .num{font-family:'Space Grotesk',sans-serif;font-size:30px;color:var(--sky);}
+  .stat .label{font-size:13px;color:var(--muted);}
+
+  /* ---------- skills ---------- */
+  .skill-groups{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  @media(max-width:760px){.skill-groups{grid-template-columns:1fr 1fr;}}
+  @media(max-width:480px){.skill-groups{grid-template-columns:1fr;}}
+  .skill-card{
+    border:1px solid var(--line);border-radius:8px;padding:22px 20px;background:var(--bg-panel);
+  }
+  .skill-card h3{font-size:14px;font-family:'JetBrains Mono',monospace;color:var(--sky);margin-bottom:14px;font-weight:500;}
+  .skill-card ul{list-style:none;}
+  .skill-card li{color:#c3ccd9;font-size:14.5px;padding:5px 0;border-bottom:1px dashed rgba(255,255,255,0.06);}
+  .skill-card li:last-child{border-bottom:none;}
+
+  /* ---------- projects ---------- */
+  .proj-cat-label{
+    font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--sky);
+    text-transform:none;letter-spacing:0.02em;display:block;margin-bottom:6px;
+  }
+  .proj-list{display:flex;flex-direction:column;}
+  .proj{
+    display:grid;grid-template-columns:70px 1fr auto;gap:24px;align-items:start;
+    padding:30px 0;border-bottom:1px solid var(--line);
+  }
+  .proj:first-child{padding-top:0;}
+  @media(max-width:700px){.proj{grid-template-columns:1fr;gap:10px;}}
+  .proj-idx{font-family:'JetBrains Mono',monospace;color:var(--muted);font-size:13px;padding-top:4px;}
+  .proj-body h3{font-size:20px;margin-bottom:8px;}
+  .proj-body p{color:var(--muted);font-size:14.5px;max-width:58ch;margin-bottom:12px;}
+  .proj-tags{display:flex;flex-wrap:wrap;gap:8px;}
+  .proj-tags span{
+    font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--sky);
+    background:var(--sky-dim);padding:4px 9px;border-radius:4px;
+  }
+  .proj-metric{
+    font-family:'Space Grotesk',sans-serif;color:var(--cherry);font-size:22px;text-align:right;white-space:nowrap;
+  }
+  .proj-metric small{display:block;font-family:'Inter',sans-serif;color:var(--muted);font-size:11px;font-weight:400;margin-top:2px;}
+  @media(max-width:700px){.proj-metric{text-align:left;}}
+
+  /* ---------- hackathons ---------- */
+  .hack-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  @media(max-width:700px){.hack-grid{grid-template-columns:1fr;}}
+  .hack-card{
+    border:1px solid var(--line);border-radius:8px;padding:26px;background:var(--bg-panel);
+    border-top:2px solid var(--cherry);
+  }
+  .hack-card h3{font-size:18px;margin-bottom:8px;}
+  .hack-card p{color:var(--muted);font-size:14.5px;}
+
+  /* ---------- certifications ---------- */
+  .cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  @media(max-width:860px){.cert-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:600px){.cert-grid{grid-template-columns:1fr;}}
+  .cert-card{
+    border:1px solid var(--line);border-radius:8px;padding:24px;background:var(--bg-panel);
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .cert-type{
+    font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sky);
+    background:var(--sky-dim);padding:4px 9px;border-radius:4px;width:fit-content;
+  }
+  .cert-card h3{font-size:16px;line-height:1.35;}
+  .cert-card p{color:var(--muted);font-size:14px;}
+  .cert-date{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--cherry);margin-top:auto;}
+
+  .cert-preview-list{display:flex;flex-direction:column;gap:28px;margin-top:44px;}
+  .cert-preview{
+    border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--bg-panel);
+  }
+  .cert-preview-label{
+    font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sky);
+    padding:14px 18px;border-bottom:1px solid var(--line);background:var(--bg-panel-2);
+  }
+  .cert-preview img{display:block;width:100%;height:auto;}
+
+  /* ---------- contact ---------- */
+  .contact-box{
+    border:1px solid var(--line);border-radius:12px;padding:52px 40px;background:var(--bg-panel);
+    text-align:center;
+  }
+  .contact-box h2{font-size:clamp(24px,4vw,32px);margin-bottom:14px;}
+  .contact-box p{color:var(--muted);margin-bottom:30px;}
+  .contact-actions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+  .social-row{display:flex;justify-content:center;gap:22px;margin-top:34px;font-size:14px;color:var(--muted);}
+  .social-row a:hover{color:var(--sky);}
+
+  footer{padding:30px 0;border-top:1px solid var(--line);}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted);flex-wrap:wrap;gap:10px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">Suvojit Pal</div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#hackathons">Hackathons</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="btn btn-outline" style="padding:9px 18px;font-size:13px;">Get in touch</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">AVAILABLE FOR SOFTWARE ENGINEERING ROLES</div>
+      <h1>Suvojit Pal —<br>building where <span class="accent">AI</span> meets <span class="accent">software</span>.</h1>
+      <p class="lead">Final-year Computer Science & Engineering student turning practical problems into working software — from predictive models to full-stack apps.</p>
+      <div class="cta-row">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#" id="cv-download" class="btn btn-outline">Download CV</a>
+        <a href="mailto:palsuvojit205@gmail.com" class="btn btn-cherry">Say Hello</a>
+      </div>
+    </div>
+    <div class="term">
+      <div class="term-bar">
+        <span class="dot" style="background:#ff5f57;"></span>
+        <span class="dot" style="background:#febc2e;"></span>
+        <span class="dot" style="background:#28c840;"></span>
+      </div>
+      <div class="term-body">
+        <div><span class="muted">$</span> whoami</div>
+        <div id="typed-line">&nbsp;</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">// 01 about</span>
+      <h2>Summary</h2>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>I'm Suvojit Pal, a final-year B.Tech Computer Science & Engineering student at Brainware University, passionate about building practical technology solutions and solving real-world problems through software and AI.</p>
+        <p>I have experience working with technologies such as Python, React, Scikit-learn, and modern web development tools. I build intelligent experiences where AI meets modern technology.</p>
+        <p>I'm continuously improving my skills in software development, machine learning, data science, and full-stack development, with the goal of becoming a skilled software engineer and contributing to innovative, impactful projects.</p>
+      </div>
+      <div class="stat-list">
+        <div class="stat"><div class="num">11+</div><div class="label">Projects built</div></div>
+        <div class="stat"><div class="num">2</div><div class="label">Hackathons — SIH & Samsung Innovation Campus</div></div>
+        <div class="stat"><div class="num">Final Year</div><div class="label">B.Tech CSE, Brainware University</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">// 02 skills</span>
+      <h2>What I work with</h2>
+    </div>
+    <div class="skill-groups">
+      <div class="skill-card">
+        <h3>Languages</h3>
+        <ul><li>C</li><li>C++</li><li>Python</li><li>Java</li><li>JavaScript</li></ul>
+      </div>
+      <div class="skill-card">
+        <h3>Web & Frameworks</h3>
+        <ul><li>HTML</li><li>CSS</li><li>Tailwind CSS</li><li>React</li><li>Scikit-learn</li></ul>
+      </div>
+      <div class="skill-card">
+        <h3>Databases</h3>
+        <ul><li>MySQL</li><li>MongoDB</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">// 03 projects</span>
+      <h2>Selected work</h2>
+    </div>
+    <div class="proj-category">
+      <span class="proj-cat-label">AI / Machine Learning</span>
+    </div>
+    <div class="proj-list">
+      <div class="proj">
+        <div class="proj-idx">M1</div>
+        <div class="proj-body">
+          <h3>Movie Recommendation System</h3>
+          <p>A recommendation engine trained on the MovieLens dataset, comparing Random Forest and Linear Regression approaches to surface relevant film suggestions.</p>
+          <div class="proj-tags"><span>Python</span><span>Scikit-learn</span><span>MovieLens</span></div>
+        </div>
+        <div class="proj-metric">—</div>
+      </div>
+      <div class="proj">
+        <div class="proj-idx">M2</div>
+        <div class="proj-body">
+          <h3>Handwritten Digit Recognition</h3>
+          <p>A CNN-based model trained on MNIST to classify handwritten digits — later developed further as a hackathon prototype.</p>
+          <div class="proj-tags"><span>Python</span><span>CNN</span><span>MNIST</span></div>
+        </div>
+        <div class="proj-metric">97%<small>accuracy</small></div>
+      </div>
+      <div class="proj">
+        <div class="proj-idx">M3</div>
+        <div class="proj-body">
+          <h3>Loan Default Prediction System</h3>
+          <p>A data mining pipeline that predicts loan default risk, covering the full data science workflow from cleaning to model evaluation with visualized results.</p>
+          <div class="proj-tags"><span>Python</span><span>Data Mining</span><span>MySQL</span></div>
+        </div>
+        <div class="proj-metric">—</div>
+      </div>
+      <div class="proj">
+        <div class="proj-idx">M4</div>
+        <div class="proj-body">
+          <h3>Pasuraksha AI</h3>
+          <p>A livestock health platform built for a hackathon — vets and farmers can log in, run an AI-driven analysis on livestock photos, route flagged cases to a veterinarian for review, and track full case history from a personal dashboard.</p>
+          <div class="proj-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Hackathon</span></div>
+        </div>
+        <div class="proj-metric">—</div>
+      </div>
+    </div>
+
+    <div class="proj-category" style="margin-top:44px;">
+      <span class="proj-cat-label" style="color:var(--cherry);">Web Development</span>
+    </div>
+    <div class="proj-list">
+      <div class="proj">
+        <div class="proj-idx">W1</div>
+        <div class="proj-body">
+          <h3>To-Do List Web App</h3>
+          <p>A clean, responsive task-management website built to practice core front-end fundamentals and interactive UI state.</p>
+          <div class="proj-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+        </div>
+        <div class="proj-metric">—</div>
+      </div>
+      <div class="proj">
+        <div class="proj-idx">W2</div>
+        <div class="proj-body">
+          <h3>Age Calculator</h3>
+          <p>A lightweight browser tool that calculates exact age in years, months, and days from a given date of birth.</p>
+          <div class="proj-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+        </div>
+        <div class="proj-metric">—</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="hackathons">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">// 04 hackathons</span>
+      <h2>Competitive experience</h2>
+    </div>
+    <div class="hack-grid">
+      <div class="hack-card">
+        <h3>Smart India Hackathon (SIH)</h3>
+        <p>Participated in India's national-level hackathon, collaborating on a software solution under real-world problem statements and time constraints.</p>
+      </div>
+      <div class="hack-card">
+        <h3>Samsung Innovation Campus</h3>
+        <p>Completed the AI Track internship and hackathon, reaching the second round with a handwritten digit recognition prototype.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="certifications">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">// 05 certifications</span>
+      <h2>Certifications & workshops</h2>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <span class="cert-type">Internship</span>
+        <h3>Samsung Innovation Campus — Artificial Intelligence</h3>
+        <p>Completed the AI Track internship program, Samsung Innovation Campus.</p>
+        <span class="cert-date">Sep 2025 – Nov 2025</span>
+      </div>
+      <div class="cert-card">
+        <span class="cert-type">Certification</span>
+        <h3>CyberOps Associate</h3>
+        <p>Cisco Networking Academy, offered through NIIT Foundation.</p>
+        <span class="cert-date">Feb 2026</span>
+      </div>
+      <div class="cert-card">
+        <span class="cert-type">Workshop</span>
+        <h3>appse ai Academy — Foundation Course</h3>
+        <p>Workshop on solving a real-world problem, completed with excellence and commitment.</p>
+        <span class="cert-date">Aug 2026</span>
+      </div>
+    </div>
+
+    <div class="cert-preview-list">
+      <div class="cert-preview">
+        <div class="cert-preview-label">Samsung Innovation Campus — Artificial Intelligence</div>
+        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAcFBQYFBAcGBgYIBwcICxILCwoKCxYPEA0SGhYbGhkWGRgcICgiHB4mHhgZIzAkJiorLS4tGyIyNTEsNSgsLSz/2wBDAQcICAsJCxULCxUsHRkdLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCz/wAARCALuA+gDASIAAhEBAxEB/8QAHQABAAICAwEBAAAAAAAAAAAAAAYHAQUCBAgDCf/EAGMQAAEDAwEDBAsICwoMBQUAAwEAAgMEBREGBxIhEzFBURQVFhciVVZhkZTRMlJxkpOxstIIIzM2U2J0gaGi4kJGVGRyc4Kjs+EYJCUmJzQ1N0VjZcFDdYPCwyhEhOPwOKTx/8QAGgEBAQADAQEAAAAAAAAAAAAAAAEDBAUCBv/EADURAQABAQQHBwMFAQEBAQEAAAABAgMRUVIEEhMUFXGRITEyM0GBoQVhsSI0QsHw0WJDI+H/2gAMAwEAAhEDEQA/APSKIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiIGUXneW+XttRODfrscSvA/xpwwN44XA329ePbr62/2rqR9Nrn+UNSdKpj0ei0XnM329ePLr62/2p2+vfj66+tuXrhleaE3unB6MRecu399H/H7t625Y7or8P3wXb1pycLrzR8pvdOD0ci84d0l/H74bt60Vjul1B5Q3b1kq8KtM0fJvlOD0
